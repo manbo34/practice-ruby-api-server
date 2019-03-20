@@ -1,0 +1,14 @@
+# モデルを追加して適応
+rails g model post title:string
+rails g controller posts
+rake db:migrate
+
+rails g scaffold User name:string pwd:string token:token
+
+# 追加するモデル
+rails g scaffold user name:string token:token
+rails g scaffold author key:string password:string user:references
+rails g scaffold follow user:references follow_id:integer
+rails g scaffold tweet user:references message:string
+rails g scaffold direct_message user:references to:integer message:string
+rails g scaffold favorite tweet:references user:references
