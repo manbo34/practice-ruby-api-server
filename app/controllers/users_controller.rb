@@ -33,6 +33,10 @@ order by d.created_at desc
     render json: ActiveRecord::Base.connection.select_all(sql)
   end
 
+def tweet
+  render json: Tweet.joins(:user).where(:user_id => params[:id])
+end
+
   # GET /users
   def index
     @users = User.all
