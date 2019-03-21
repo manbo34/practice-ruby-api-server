@@ -1,6 +1,26 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
 
+  # GET /users/1/follow
+  def follow
+    sql = "select u.* from follows f
+    inner join users u
+    on f.user_id == u.id
+    where f.follow_id == #{params[:id]}"
+
+    render json: ActiveRecord::Base.connection.select_all(sql)
+  end
+
+  # GET /users/1/follower
+  def follower
+    sql = "select u.* from follows f
+    inner join users u
+    on f.follow_id == u.id
+    where f.user_id == #{params[:id]}"
+
+    render json: ActiveRecord::Base.connection.select_all(sql)
+  end
+
   # GET /users
   def index
     @users = User.all
@@ -39,13 +59,14 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def user_params
-      params.require(:user).permit(:name, :token)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def user_params
+    params.require(:user).permit(:name, :token)
+  end
 end
