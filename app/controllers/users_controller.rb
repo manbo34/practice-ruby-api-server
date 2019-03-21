@@ -37,6 +37,25 @@ order by d.created_at desc
     render json: Tweet.joins(:user).select("users.*, tweets.*").where(:user_id => params[:id])
   end
 
+  def time_line
+    sql = "
+  select *
+from tweets t
+       inner join users u
+                  on u.id == t.user_id
+       left join (select count(*) as favorites, t.id as favo_id
+                  from tweets t
+                         inner join favorites f
+                                    on t.id == f.tweet_id
+                  group by tweet_id)
+                 on favo_id == t.id
+where t.user_id in (select follow_id from follows where follows.user_id == #{params[:id]})
+   or t.user_id == #{params[:id]}
+order by t.updated_at desc
+"
+    render json: ActiveRecord::Base.connection.select_all(sql)
+  end
+
   # GET /users
   def index
     @users = User.all

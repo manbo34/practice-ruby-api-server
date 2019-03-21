@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get 'follower'
       get 'direct_message'
       get 'tweet'
+      get 'time_line'
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
