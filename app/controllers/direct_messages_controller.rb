@@ -46,6 +46,6 @@ class DirectMessagesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def direct_message_params
-      params.require(:direct_message).permit(:user_id, :to, :message)
+      params.require(:direct_message).permit(:from_id, :to_id, :message)
     end
 end

@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  user: one
-  to: 1
+  from_id: 1
+  to_id: 1
   message: MyString
 
 two:
-  user: two
-  to: 1
+  from_id: 1
+  to_id: 1
   message: MyString

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_21_130125) do
+ActiveRecord::Schema.define(version: 2019_03_21_132634) do
 
   create_table "authors", force: :cascade do |t|
     t.string "key"
@@ -22,13 +22,11 @@ ActiveRecord::Schema.define(version: 2019_03_21_130125) do
   end
 
   create_table "direct_messages", force: :cascade do |t|
-    t.integer "user_id"
+    t.integer "from_id"
     t.integer "to_id"
     t.string "message"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["to_id"], name: "index_direct_messages_on_to_id"
-    t.index ["user_id"], name: "index_direct_messages_on_user_id"
   end
 
   create_table "favorites", force: :cascade do |t|

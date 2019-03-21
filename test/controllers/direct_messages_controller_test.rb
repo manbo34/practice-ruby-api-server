@@ -12,7 +12,7 @@ class DirectMessagesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create direct_message" do
     assert_difference('DirectMessage.count') do
-      post direct_messages_url, params: { direct_message: { message: @direct_message.message, to: @direct_message.to, user_id: @direct_message.user_id } }, as: :json
+      post direct_messages_url, params: { direct_message: { from_id: @direct_message.from_id, message: @direct_message.message, to_id: @direct_message.to_id } }, as: :json
     end
 
     assert_response 201
@@ -24,7 +24,7 @@ class DirectMessagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update direct_message" do
-    patch direct_message_url(@direct_message), params: { direct_message: { message: @direct_message.message, to: @direct_message.to, user_id: @direct_message.user_id } }, as: :json
+    patch direct_message_url(@direct_message), params: { direct_message: { from_id: @direct_message.from_id, message: @direct_message.message, to_id: @direct_message.to_id } }, as: :json
     assert_response 200
   end
 

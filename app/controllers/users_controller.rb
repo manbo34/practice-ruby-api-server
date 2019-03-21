@@ -21,6 +21,18 @@ class UsersController < ApplicationController
     render json: ActiveRecord::Base.connection.select_all(sql)
   end
 
+  def direct_message
+    sql = "select d.message, u.*
+from direct_messages d
+       inner join users u
+                  on d.from_id == u.id
+where d.to_id == #{params[:id]}
+order by d.created_at desc
+"
+
+    render json: ActiveRecord::Base.connection.select_all(sql)
+  end
+
   # GET /users
   def index
     @users = User.all
