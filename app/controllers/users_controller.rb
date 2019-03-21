@@ -34,7 +34,7 @@ order by d.created_at desc
   end
 
 def tweet
-  render json: Tweet.joins(:user).where(:user_id => params[:id])
+  render json: Tweet.joins(:user).select("users.*, tweets.*").where(:user_id => params[:id])
 end
 
   # GET /users
